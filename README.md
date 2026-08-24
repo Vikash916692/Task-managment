@@ -78,36 +78,6 @@ erDiagram
 
 ---
 
-## 👥 Role-Based Access Control (RBAC) Matrix
-
-| Capability | Admin | Project Manager | Member |
-|---|:---:|:---:|:---:|
-| Create New Projects | ✅ | ✅ | ❌ |
-| Edit / Delete Projects | ✅ | ✅ (Own / Managed) | ❌ |
-| Manage Project Members | ✅ | ✅ | ❌ |
-| Create Tasks | ✅ | ✅ | ✅ (In Project) |
-| Drag & Drop Kanban Status Change | ✅ | ✅ | ✅ |
-| Assign Tasks to Anyone | ✅ | ✅ | ❌ (Self-assign) |
-| Post Comments | ✅ | ✅ | ✅ |
-| Manage System Users & Roles | ✅ | ❌ | ❌ |
-| View System Dashboard | ✅ (All Projects) | ✅ (Managed Projects) | ✅ (Assigned Workload) |
-
----
-
-## 🔑 Pre-Seeded Demonstration Accounts
-
-When the system boots up, demo accounts and realistic projects are automatically seeded:
-
-| Role | Email | Password | Access Scope |
-|---|---|---|---|
-| **Admin** | `admin@taskflow.dev` | `Admin@123456` | Full platform access, manage users & roles |
-| **Project Manager** | `pm@taskflow.dev` | `Manager@123456` | Create projects, assign members, track workloads |
-| **Member / Developer** | `member@taskflow.dev` | `Member@123456` | View assigned projects, move tasks on Kanban |
-
-> *Tip: On the login page, you can use the **1-Click Quick Demo** buttons to immediately populate credentials!*
-
----
-
 ## 🚀 Quickstart via Docker Compose
 
 To launch the complete application with **FastAPI, React (Nginx), MySQL 8.0, and Redis**:
@@ -229,13 +199,3 @@ task-management/
 ├── .env.example
 └── README.md
 ```
-
----
-
-## 🛡️ SDE Technical Interview Highlights
-
-1. **Layered Modular Architecture**: Strict separation of concerns across API routes, Dependency Injection, Service layer, SQLAlchemy models, and Pydantic schemas.
-2. **Optimistic UI & Reordering**: Kanban drag-and-drop calculates sibling position shifts efficiently with minimal SQL queries.
-3. **Smart Redis Invalidation**: Cache keys are tagged by user role and invalidated upon mutations to avoid stale reads while maximizing throughput.
-4. **Resilience & Graceful Fallback**: The backend handles offline Redis instances transparently without failing HTTP requests.
-5. **Full Integration Testing**: Pytest suite validates auth tokens, RBAC permission rejections (e.g. Member trying to delete a project), and task transitions.
